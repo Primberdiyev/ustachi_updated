@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Usta — Web (telefon 430x932)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "args": [
+                "--web-browser-flag=--window-size=430,932",
+                "--web-browser-flag=--window-position=80,40"
+            ]
+        },
+        {
+            "name": "Usta — Web (planshet 834x1112)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "args": [
+                "--web-browser-flag=--window-size=834,1112",
+                "--web-browser-flag=--window-position=80,40"
+            ]
+        },
+        {
+            "name": "Flutter (lib/features/my_homes/domain/entities/arartment_users_response_entity.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/features/my_homes/domain/entities/arartment_users_response_entity.dart"
+        }
+    ]
+}

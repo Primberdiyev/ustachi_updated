@@ -1,0 +1,114 @@
+name: ustachi
+description: "Ustachi project."
+publish_to: "none"
+version: 1.0.7+18
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  #sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  path_provider: ^2.1.5
+  modal_bottom_sheet: ^3.0.0
+  flutter_screenutil: ^5.9.3
+  flutter_typeahead: ^5.2.0
+  freezed: ^3.2.5
+  freezed_annotation: ^3.1.0
+  json_serializable: ^6.13.1
+  package_info_plus: ^9.0.0
+  video_player: ^2.10.1
+  file_picker: ^10.3.6
+  connectivity_plus: ^7.0.0
+  http: ^1.5.0
+  cupertino_icons: ^1.0.8
+
+  # Rom-eshik chizmasi — mijoz va usta ilovasi uchun umumiy model.
+  ustachi_hisob:
+    path: ../packages/ustachi_hisob
+  slang: ^4.6.1
+  slang_flutter: ^4.6.0
+  flutter_svg: ^2.0.17
+  provider: ^6.1.4
+  shared_preferences: ^2.5.3
+  chuck_interceptor: ^2.4.0
+  smooth_page_indicator: ^2.0.1
+  mask_text_input_formatter: ^2.9.0
+  intl: ^0.20.2
+  cached_network_image: ^3.4.1
+  flutter_bloc: ^9.1.1
+  bloc_concurrency: ^0.3.0
+  equatable: ^2.0.7
+  dropdown_button2: ^3.0.0
+  dio: ^5.9.0
+  flutter_secure_storage: ^10.0.0
+  get_it: ^9.2.0
+  json_annotation: ^4.9.0
+  local_auth: ^3.0.1
+  image_picker: ^1.2.0
+  page_view_indicators: ^2.0.0
+  dots_indicator: ^4.0.1
+  page_indicator_plus: ^1.0.4
+  url_launcher: ^6.3.2
+  audioplayers: ^6.5.1
+  auto_route: ^11.1.0
+  fluttertoast: ^9.0.0
+  objectbox: ^5.2.0
+  pinput: ^6.0.2
+  yaml: ^3.1.3
+  web_socket_channel: ^3.0.3
+  firebase_core: ^4.12.1
+  firebase_messaging: ^16.4.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  slang_build_runner: ^4.6.0
+  build_runner: ^2.10.1
+  auto_route_generator: ^10.4.0
+  objectbox_generator: ^5.2.0
+  flutter_gen_runner: ^5.13.0+1
+
+flutter_gen:
+  fonts:
+    outputs:
+      package_parameter_enabled: true
+  assets:
+    outputs:
+      package_parameter_enabled: false
+      directory_path_enabled: true
+    
+  output: lib/core/assets/lib/gen/
+  line_length: 80
+  integrations:
+    image: true
+    flutter_svg: true
+
+dependency_overrides:
+  audio_session: 0.2.1
+  device_info_plus: 11.5.0
+  google_maps_flutter_android: 2.17.0
+  video_player_android: 2.8.10
+  webview_flutter_android: 4.8.2
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/sounds/
+    - shorebird.yaml
+
+  fonts:
+    - family: SfProDisplay
+      fonts:
+        - asset: assets/fonts/sf-pro-display/sf-pro-display-regular.otf
+        - asset: assets/fonts/sf-pro-display/sf-pro-display-medium.otf
+        - asset: assets/fonts/sf-pro-display/sf-pro-display-bold.otf

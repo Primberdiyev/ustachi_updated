@@ -1,0 +1,74 @@
+# QO'LDA BUYRUQ — simpl serverda ruxsat etilgan Django management
+# buyrug'ini ishga tushiradi (masalan, Telegram e'lonlarini yangilash).
+#
+# ISHLATISH: GitHub → Actions → "Manage" → Run workflow. Avval "dry_run"
+# yoqilgan holda ishga tushirib natijani ko'ring, keyin o'chirib qayta.
+#
+# XAVFSIZLIK: faqat pastdagi ro'yxatdagi buyruqlar ishlaydi — ixtiyoriy
+# buyruq kiritib bo'lmaydi. Deploy bilan bir vaqtda ishlamaydi (bir xil
+# concurrency guruhi).
+
+name: Manage
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: "Buyruq"
+        required: true
+        type: choice
+        options:
+          - repost_open_telegram_orders
+          - refresh_telegram_order_captions
+      dry_run:
+        description: "Bazaga yozmasdan ko'rsatish (--dry-run)"
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  manage:
+    runs-on: [self-hosted, Linux, X64, simpl]
+    timeout-minutes: 15
+    env:
+      REPO_DIR: ${{ vars.REPO_DIR || '/var/www/ustachi-backend' }}
+      COMMAND: ${{ inputs.command }}
+      DRY_RUN: ${{ inputs.dry_run }}
+
+    steps:
+      - name: Muhitni aniqlash
+        run: |
+          set -euo pipefail
+          echo "runner  : $(whoami)@$(hostname)"
+          echo "REPO_DIR: $REPO_DIR"
+          [ -d "$REPO_DIR/.git" ] || { echo "::error::$REPO_DIR git-repozitoriy emas. REPO_DIR o'zgaruvchisini to'g'rilang."; exit 1; }
+          DJANGO_DIR="$REPO_DIR"
+          [ -f "$DJANGO_DIR/manage.py" ] || { echo "::error::$DJANGO_DIR/manage.py topilmadi."; exit 1; }
+          VENV=""
+          for v in env venv .venv; do
+            if [ -x "$DJANGO_DIR/$v/bin/python" ]; then VENV="$v"; break; fi
+          done
+          [ -n "$VENV" ] || { echo "::error::$DJANGO_DIR ichida virtual muhit (env/venv/.venv) topilmadi."; exit 1; }
+          echo "DJANGO_DIR=$DJANGO_DIR" >> "$GITHUB_ENV"
+          echo "PY=$DJANGO_DIR/$VENV/bin/python" >> "$GITHUB_ENV"
+          git -C "$REPO_DIR" log -1 --oneline
+
+      - name: Buyruq
+        working-directory: ${{ env.DJANGO_DIR }}
+        run: |
+          set -euo pipefail
+          case "$COMMAND" in
+            repost_open_telegram_orders|refresh_telegram_order_captions) COMMANDS=("$COMMAND") ;;
+            *) echo "::error::Ruxsat etilmagan buyruq: $COMMAND"; exit 1 ;;
+          esac
+          ARGS=()
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          for c in "${COMMANDS[@]}"; do
+            echo "::group::manage.py $c ${ARGS[*]:-}"
+            "$PY" manage.py "$c" ${ARGS[@]+"${ARGS[@]}"}
+            echo "::endgroup::"
+          done

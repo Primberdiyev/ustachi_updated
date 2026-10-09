@@ -1,0 +1,64 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Mijoz — Web (telefon 430x728)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ustachi_mijoz",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "preLaunchTask": "mijoz-web-phone-resize",
+            "args": [
+                "--web-port=5556",
+                "--dart-define=API_BASE_URL=https://usta-top.simpl.uz",
+                "--dart-define=SOCKET_BASE_URL=https://usta-top.simpl.uz",
+                "--web-browser-flag=--user-data-dir=${env:LOCALAPPDATA}\\ustachi_web_phone_vscode",
+                "--web-browser-flag=--app=http://localhost:5556",
+                "--web-browser-flag=--window-size=430,728",
+                "--web-browser-flag=--window-position=60,0",
+                "--web-browser-flag=--touch-events=enabled",
+                "--web-browser-flag=--user-agent=Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+            ]
+        },
+        {
+            "name": "Mijoz — Web (planshet 850x728)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ustachi_mijoz",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "preLaunchTask": "mijoz-web-tablet-resize",
+            "args": [
+                "--web-port=5557",
+                "--dart-define=API_BASE_URL=https://usta-top.simpl.uz",
+                "--dart-define=SOCKET_BASE_URL=https://usta-top.simpl.uz",
+                "--web-browser-flag=--user-data-dir=${env:LOCALAPPDATA}\\ustachi_web_tablet_vscode",
+                "--web-browser-flag=--app=http://localhost:5557",
+                "--web-browser-flag=--window-size=850,728",
+                "--web-browser-flag=--window-position=20,0",
+                "--web-browser-flag=--touch-events=enabled"
+            ]
+        },
+        {
+            "name": "Usta — Web (telefon 430x728)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ustachi_usta",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "preLaunchTask": "usta-web-phone-resize",
+            "args": [
+                "--web-port=5558",
+                "--dart-define=API_BASE_URL=https://usta-top.simpl.uz",
+                "--dart-define=SOCKET_BASE_URL=https://usta-top.simpl.uz",
+                "--web-browser-flag=--user-data-dir=${env:LOCALAPPDATA}\\ustachi_usta_web_phone_vscode",
+                "--web-browser-flag=--app=http://localhost:5558",
+                "--web-browser-flag=--window-size=430,728",
+                "--web-browser-flag=--window-position=520,0",
+                "--web-browser-flag=--touch-events=enabled",
+                "--web-browser-flag=--user-agent=Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+            ]
+        }
+    ]
+}

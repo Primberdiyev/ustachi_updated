@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Traffikni tahlil qilish (mitmproxy/Charles) uchun: faqat DEBUG buildda
+  qo'lda o'rnatilgan (user) sertifikatlarga ishonadi. <debug-overrides>
+  release buildda E'TIBORGA OLINMAYDI — production xavfsizligi o'zgarmaydi.
+-->
+<network-security-config>
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="user" />
+            <certificates src="system" />
+        </trust-anchors>
+    </debug-overrides>
+    <!-- Localhost backend (emulator host = 10.0.2.2) uchun HTTP ruxsati.
+         Faqat dev manzili — production bu manzilga ulanmaydi. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>

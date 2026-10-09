@@ -1,0 +1,228 @@
+{% load static %}
+<!doctype html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ustachi — Ishni ishonchli boshlang | Usta va ta'mirlash xizmatlari</title>
+    <meta name="description"
+        content="Ustachi — usta chaqirishdan oldin ish narxini hisoblang, tekshirilgan ustalarni toping va buyurtmangizni xotirjam kuzating." />
+    <meta name="keywords"
+        content="ustachi, usta top, usta, santexnik, elektrik, tamirlash, bo'yoqchi, usta xizmatlari, usta narxlari, Toshkent" />
+    <meta name="author" content="Ustachi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://ustachi.uz/" />
+    <meta name="theme-color" content="#123b36" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="{% static 'landing/images/logo.png' %}" />
+    <link rel="apple-touch-icon" href="{% static 'landing/images/logo.png' %}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ustachi.uz/" />
+    <meta property="og:title" content="Ustachi — Ishni ishonchli boshlang" />
+    <meta property="og:description"
+        content="Usta chaqirishdan oldin narxni biling. Ta'mirlash va xizmat ishlarini bir joyda hisoblang, mos ustani tanlang." />
+    <meta property="og:image" content="https://ustachi.uz{% static 'landing/images/logo.png' %}" />
+    <meta property="og:site_name" content="Ustachi" />
+    <meta property="og:locale" content="uz_UZ" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://ustachi.uz/" />
+    <meta name="twitter:title" content="Ustachi — Ishni ishonchli boshlang" />
+    <meta name="twitter:description"
+        content="Usta chaqirishdan oldin narxni biling. Ta'mirlash va xizmat ishlarini bir joyda hisoblang, mos ustani tanlang." />
+    <meta name="twitter:image" content="https://ustachi.uz{% static 'landing/images/logo.png' %}" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'landing/css/styles.css' %}" />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ustachi",
+      "url": "https://ustachi.uz",
+      "description": "Ta'mirlash va xizmat ishlarini bir joyda hisoblang, mos ustani tanlang va buyurtmangizni xotirjam kuzating.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "iOS, Android, Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "UZS"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="Ustachi bosh sahifa"><span class="brand-mark"><img
+            src="{% static 'landing/images/logo.png' %}" alt="" /></span><span>ustachi</span></a>
+        <nav class="desktop-nav" aria-label="Asosiy navigatsiya">
+            <a href="#qanday-ishlaydi">Qanday ishlaydi?</a>
+            <a href="#xizmatlar">Xizmatlar</a>
+            <a href="#ustalar">Ustalar uchun</a>
+        </nav>
+        <a class="header-cta" href="#yuklab-oling">Ilovani yuklash <span>↗</span></a>
+    </header>
+
+    <main id="top">
+        <section class="hero section-wrap">
+            <div class="hero-copy">
+                <div class="eyebrow"><span class="eyebrow-dot"></span> Uyingiz uchun aqlli yordamchi</div>
+                <h1>Usta chaqirishdan oldin <em>narxni biling.</em></h1>
+                <p class="hero-text">Ta'mirlash va xizmat ishlarini bir joyda hisoblang, mos ustani tanlang va
+                    buyurtmangizni xotirjam kuzating.</p>
+                <div class="hero-actions">
+                    <a class="button button-dark" href="#hisoblagich">Narxni hisoblash <span>→</span></a>
+                    <a class="text-link" href="#qanday-ishlaydi">Qanday ishlaydi? <span>↓</span></a>
+                </div>
+                <div class="trust-row">
+                    <div class="avatars"><span>AK</span><span>DS</span><span>MN</span><b>+</b></div><span>1000+ mijozlar
+                        Ustachini tanladi</span>
+                </div>
+            </div>
+            <div class="hero-visual" aria-label="Ustachi ilovasi ko'rinishi">
+                <div class="sun-shape"></div>
+                <div class="phone-card">
+                    <div class="phone-top"><span class="mini-brand">ustachi</span><span class="signal">•••</span></div>
+                    <p class="phone-greeting">Assalomu alaykum, Dilshod 👋</p>
+                    <h3>Bugun nimani<br /><strong>hisoblaymiz?</strong></h3>
+                    <div class="phone-search"><span>⌕</span> Xizmatni qidiring...</div>
+                    <div class="phone-calc">
+                        <div><small>TAXMINIY HISOB</small><strong>2 450 000 <i>so'm</i></strong><span>✓ Material va ish
+                                haqi bilan</span></div><span class="calc-icon">↗</span>
+                    </div>
+                    <div class="phone-label">XIZMAT TURLARI</div>
+                    <div class="service-pills"><span>🔧 Santexnika</span><span>⚡ Elektrik</span><span>🎨
+                            Bo'yoq</span><span>＋</span></div>
+                </div>
+                <div class="floating-note"><span>✓</span>
+                    <div><b>Hisob tayyor!</b><small>3 ta mos usta topildi</small></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="proof section-wrap">
+            <div><span class="proof-number">01</span>
+                <p>ANIQ HISOB<br /><strong>ortiqcha xarajatsiz</strong></p>
+            </div>
+            <div><span class="proof-number">02</span>
+                <p>TEKSHIRILGAN<br /><strong>ustalar tarmog'i</strong></p>
+            </div>
+            <div><span class="proof-number">03</span>
+                <p>OSON BOSHQARUV<br /><strong>bir ilovada</strong></p>
+            </div>
+        </section>
+
+        <section class="how section-wrap" id="qanday-ishlaydi">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">UCH QADAMDA</div>
+                    <h2>Muammoingizdan<br /><em>yechimingizgacha.</em></h2>
+                </div>
+                <p>Ustachi har bir qadamni sodda va tushunarli qiladi. Siz esa natijani nazorat qilasiz.</p>
+            </div>
+            <div class="steps">
+                <article>
+                    <div class="step-icon">⌕</div><span>01</span>
+                    <h3>Ishni tanlang</h3>
+                    <p>Kerakli xizmat turini tanlang va ish tafsilotlarini kiriting.</p>
+                </article>
+                <article class="step-featured">
+                    <div class="step-icon">▤</div><span>02</span>
+                    <h3>Narxni hisoblang</h3>
+                    <p>Materiallar va ish haqi bo'yicha shaffof taxminiy hisobni oling.</p>
+                </article>
+                <article>
+                    <div class="step-icon">✓</div><span>03</span>
+                    <h3>Ustani chaqiring</h3>
+                    <p>Reytingi, tajribasi va narxi mos bo'lgan ustani tanlang.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="calculator-section section-wrap" id="hisoblagich">
+            <div class="calculator-intro">
+                <div class="eyebrow">TEZKOR HISOBLAGICH</div>
+                <h2>Taxminiy narxni<br /><em>hoziroq bilib oling.</em></h2>
+                <p>Bu faqat dastlabki hisob. Yakuniy narx ish joyida usta bilan kelishiladi.</p>
+            </div>
+            <div class="calculator-card"><label for="service">Xizmat turi</label><select id="service">
+                    <option value="1">Santexnika</option>
+                    <option value="1.25">Elektrik ishlari</option>
+                    <option value="0.8">Bo'yoq va suvoq</option>
+                    <option value="1.5">Konditsioner</option>
+                </select><label for="area">Ish hajmi <output id="areaValue">10 m²</output></label><input id="area"
+                    type="range" min="1" max="100" value="10" />
+                <div class="estimate"><span>TAXMINIY HISOB</span><strong id="estimate">1 250 000
+                        <i>so'mdan</i></strong><small>Ustalar bilan bog'lanib, aniq taklif oling</small></div><a
+                    class="button button-gold" href="#yuklab-oling">Ilovada davom etish <span>→</span></a>
+            </div>
+        </section>
+
+        <section class="pro-section" id="ustalar">
+            <div class="section-wrap pro-inner">
+                <div class="pro-copy">
+                    <div class="eyebrow light-eyebrow">USTACHI PRO</div>
+                    <h2>Ustalar uchun ham<br /><em>ishlar osonlashdi.</em></h2>
+                    <p>O'z xizmatlaringizni ko'rsating, adolatli narx taklif qiling va yangi buyurtmalarni bir joydan
+                        boshqaring.</p>
+                    <ul>
+                        <li><span>✓</span> Yangi buyurtmalarni tez toping</li>
+                        <li><span>✓</span> Narxni o'zingiz hisoblang</li>
+                        <li><span>✓</span> Mijozlar bilan ishonchli ishlang</li>
+                    </ul><a class="button button-light" href="#yuklab-oling">Ustachi Pro haqida <span>→</span></a>
+                </div>
+                <div class="pro-art">
+                    <div class="pro-grid"></div>
+                    <div class="pro-panel">
+                        <div class="panel-top"><span>BUGUNGI ISHLAR</span><b>3 ta</b></div>
+                        <div class="job"><span class="job-dot blue"></span>
+                            <div><b>Elektrik montaj</b><small>Yangi so'rov · Yunusobod</small></div>
+                            <strong>+850k</strong>
+                        </div>
+                        <div class="job"><span class="job-dot gold"></span>
+                            <div><b>Suv quvuri ta'miri</b><small>Taklif yuborilgan</small></div><strong>+420k</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="download section-wrap" id="yuklab-oling">
+            <div class="download-copy">
+                <div class="eyebrow">BOSHLASH VAQTI KELDI</div>
+                <h2>Yaxshi ish<br /><em>Ustachidan boshlanadi.</em></h2>
+                <p>Mijoz bo'lsangiz Ustachini, usta bo'lsangiz Ustachi Pro'ni yuklab oling.</p>
+                <div class="store-buttons"><a href="#" class="store-button"><span>▶</span>
+                        <div><small>GET IT ON</small><b>Google Play</b></div>
+                    </a><a href="#" class="store-button"><span></span>
+                        <div><small>Download on the</small><b>App Store</b></div>
+                    </a></div>
+            </div>
+                <div class="download-mark"><img class="app-logo" src="{% static 'landing/images/logo.png' %}"
+                    alt="Ustachi logotipi" /><span>ustachi</span><small>ISHNI ISHONCHLI
+                    BOSHLANG</small></div>
+        </section>
+    </main>
+
+    <footer class="footer section-wrap"><a class="brand" href="#top"><span class="brand-mark"><img
+                    src="{% static 'landing/images/logo.png' %}" alt="" /></span><span>ustachi</span></a><span>© 2026 Ustachi. Barcha huquqlar
+            himoyalangan.</span>
+        <div><a href="#">Maxfiylik</a><a href="#">Yordam</a><a href="#">Instagram ↗</a></div>
+    </footer>
+    <script src="{% static 'landing/js/script.js' %}"></script>
+</body>
+
+</html>

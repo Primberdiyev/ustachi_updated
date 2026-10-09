@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "web-phone-resize",
+            "type": "process",
+            "command": "${workspaceFolder}/tool/resize_web_phone_bg.cmd",
+            "args": ["ustachi_web_phone_vscode", "430", "728"],
+            "presentation": { "reveal": "never", "close": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "web-tablet-resize",
+            "type": "process",
+            "command": "${workspaceFolder}/tool/resize_web_phone_bg.cmd",
+            "args": ["ustachi_web_tablet_vscode", "850", "728"],
+            "presentation": { "reveal": "never", "close": true },
+            "problemMatcher": []
+        }
+    ]
+}

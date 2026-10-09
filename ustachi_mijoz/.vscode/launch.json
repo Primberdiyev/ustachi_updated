@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Mijoz — Web (telefon 430x932)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "preLaunchTask": "web-phone-resize",
+            "args": [
+                "--web-port=5556",
+                "--web-browser-flag=--user-data-dir=${env:LOCALAPPDATA}\\ustachi_web_phone_vscode",
+                "--web-browser-flag=--app=http://localhost:5556",
+                "--web-browser-flag=--window-size=430,728",
+                "--web-browser-flag=--window-position=60,0",
+                "--web-browser-flag=--touch-events=enabled",
+                "--web-browser-flag=--user-agent=Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+            ]
+        },
+        {
+            "name": "Mijoz — Web (planshet 850x728)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "preLaunchTask": "web-tablet-resize",
+            "args": [
+                "--web-port=5557",
+                "--web-browser-flag=--user-data-dir=${env:LOCALAPPDATA}\\ustachi_web_tablet_vscode",
+                "--web-browser-flag=--app=http://localhost:5557",
+                "--web-browser-flag=--window-size=850,728",
+                "--web-browser-flag=--window-position=20,0",
+                "--web-browser-flag=--touch-events=enabled"
+            ]
+        },
+        {
+            "name": "Flutter (lib/features/my_homes/domain/entities/arartment_users_response_entity.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/features/my_homes/domain/entities/arartment_users_response_entity.dart"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+<!-- ROM — xizmat turi belgisi.
+     Rang KODDAN beriladi: barcha bo'yoq `currentColor`, chuqurlik esa
+     `fill-opacity` bilan. Shu sababli bitta fayl ikkala temada ham,
+     har qanday tusda ham to'g'ri chiqadi (ColorFilter.srcIn alfani saqlaydi). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- oyna to'ldirmasi -->
+  <rect x="9" y="6" width="30" height="32" rx="3" fill="currentColor" fill-opacity=".10"/>
+  <rect x="13.5" y="10.5" width="21" height="23" fill="currentColor" fill-opacity=".16"/>
+  <!-- rama va bo'luvchilar -->
+  <rect x="9" y="6" width="30" height="32" rx="3" stroke="currentColor" stroke-width="2.4"/>
+  <rect x="13.5" y="10.5" width="21" height="23" stroke="currentColor" stroke-width="1.7"/>
+  <path d="M24 10.5v23M13.5 22h21" stroke="currentColor" stroke-width="1.7"/>
+  <!-- tokcha -->
+  <path d="M6 42h36" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

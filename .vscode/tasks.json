@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "mijoz-web-phone-resize",
+            "type": "process",
+            "command": "${workspaceFolder}/ustachi_mijoz/tool/resize_web_phone_bg.cmd",
+            "args": ["ustachi_web_phone_vscode", "430", "728", "60", "0"],
+            "presentation": { "reveal": "never", "close": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "mijoz-web-tablet-resize",
+            "type": "process",
+            "command": "${workspaceFolder}/ustachi_mijoz/tool/resize_web_phone_bg.cmd",
+            "args": ["ustachi_web_tablet_vscode", "850", "728", "20", "0"],
+            "presentation": { "reveal": "never", "close": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "usta-web-phone-resize",
+            "type": "process",
+            "command": "${workspaceFolder}/ustachi_mijoz/tool/resize_web_phone_bg.cmd",
+            "args": ["ustachi_usta_web_phone_vscode", "430", "728", "520", "0"],
+            "presentation": { "reveal": "never", "close": true },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    constant_identifier_names: ignore
+    overridden_fields: ignore
+    override_on_non_overriding_member: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - macos/**

@@ -1,0 +1,120 @@
+{% load static %}<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>{% block title %}Akkauntni o'chirish — Usta Top{% endblock %}</title>
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --card: #ffffff;
+      --text: #14181f;
+      --muted: #6b7280;
+      --border: #e2e5ea;
+      --danger: #d92d20;
+      --danger-dark: #b42318;
+      --ok: #067647;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px 48px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap { max-width: 460px; margin: 0 auto; }
+    .brand {
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    h1 { font-size: 21px; margin: 0 0 8px; }
+    p { margin: 0 0 14px; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .steps { color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+    label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+    }
+    input[type="text"]:focus { outline: 2px solid #14181f22; border-color: #9aa1ab; }
+    .field { margin-bottom: 18px; }
+    .checkbox {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+    .checkbox input { margin-top: 3px; width: 18px; height: 18px; flex: none; }
+    button {
+      width: 100%;
+      padding: 13px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--danger);
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover { background: var(--danger-dark); }
+    .warning {
+      background: #fef3f2;
+      border: 1px solid #fecdc9;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .warning ul { margin: 8px 0 0; padding-left: 20px; }
+    .warning li { margin-bottom: 4px; }
+    .errors {
+      background: #fef3f2;
+      border: 1px solid #fecdc9;
+      color: var(--danger-dark);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .errors ul { margin: 0; padding-left: 18px; }
+    .field-error { color: var(--danger-dark); font-size: 13px; margin-top: 6px; }
+    .back { display: block; text-align: center; margin-top: 18px; font-size: 14px; color: var(--muted); }
+    .done-mark {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: #ecfdf3; color: var(--ok);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin: 0 auto 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">Usta Top</div>
+    <div class="card">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</body>
+</html>

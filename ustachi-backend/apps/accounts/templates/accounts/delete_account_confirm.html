@@ -1,0 +1,46 @@
+{% extends "accounts/delete_account_base.html" %}
+
+{% block title %}Kodni tasdiqlang — Usta Top{% endblock %}
+
+{% block content %}
+  <p class="steps">2-qadam / 2</p>
+  <h1>Kodni tasdiqlang</h1>
+  <p class="muted">
+    Agar <strong>{{ phone_number }}</strong> raqami bilan akkaunt mavjud bo'lsa,
+    unga 6 xonali tasdiqlash kodi yuborildi. Kod 5 daqiqa amal qiladi.
+  </p>
+
+  <div class="warning">
+    Kodni tasdiqlaganingizdan so'ng akkaunt <strong>darhol va butunlay</strong>
+    o'chiriladi. Ortga qaytarish imkoni bo'lmaydi.
+  </div>
+
+  {% if form.non_field_errors %}
+    <div class="errors">
+      <ul>{% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}</ul>
+    </div>
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="field">
+      <label for="{{ form.code.id_for_label }}">{{ form.code.label }}</label>
+      {{ form.code }}
+      {% for error in form.code.errors %}
+        <div class="field-error">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <label class="checkbox" for="{{ form.confirm.id_for_label }}">
+      {{ form.confirm }}
+      <span>{{ form.confirm.label }}</span>
+    </label>
+    {% for error in form.confirm.errors %}
+      <div class="field-error" style="margin-top:-12px;margin-bottom:14px">{{ error }}</div>
+    {% endfor %}
+
+    <button type="submit">Akkauntni butunlay o'chirish</button>
+  </form>
+
+  <a class="back" href="{% url 'accounts_web:delete-account' %}">← Raqamni o'zgartirish yoki kodni qayta yuborish</a>
+{% endblock %}

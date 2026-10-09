@@ -1,0 +1,96 @@
+# DEPLOY — main'ga push bo'lganda simpl serverdagi self-hosted runner
+# serverning O'ZIDA ishlaydi: kodni tortadi, bog'liqliklarni yangilaydi,
+# migratsiya + collectstatic qiladi va gunicorn'ni qayta ishga tushiradi.
+#
+# REPO: Django loyihasi repo ildizida (ilgari ustachi_pivot monoreposidagi
+# `usta_top/` papkasi edi — 2026-09-25 da alohida repoga ajratildi).
+#
+# RUNNER: `runs-on` dagi HAMMA yorliqqa mos runner tanlanadi. "simpl" —
+# shu serverning maxsus yorlig'i.
+#
+# YO'L/SERVIS: standart qiymatlar serverdagi holatga qo'yilgan. O'zgarsa,
+# GitHub → Settings → Secrets and variables → Actions → Variables'da
+# REPO_DIR / SERVICE_NAME qo'ying — YAML'ga tegish shart emas.
+
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64, simpl]
+    timeout-minutes: 20
+    env:
+      REPO_DIR: ${{ vars.REPO_DIR || '/var/www/ustachi-backend' }}
+      SERVICE: ${{ vars.SERVICE_NAME || 'usta_top_pivot_gunicorn.service' }}
+
+    steps:
+      - name: Muhitni aniqlash
+        run: |
+          set -euo pipefail
+          echo "runner  : $(whoami)@$(hostname)"
+          echo "REPO_DIR: $REPO_DIR"
+          echo "SERVICE : $SERVICE"
+          [ -d "$REPO_DIR/.git" ] || { echo "::error::$REPO_DIR git-repozitoriy emas. REPO_DIR o'zgaruvchisini to'g'rilang."; exit 1; }
+          DJANGO_DIR="$REPO_DIR"
+          [ -f "$DJANGO_DIR/manage.py" ] || { echo "::error::$DJANGO_DIR/manage.py topilmadi."; exit 1; }
+          VENV=""
+          for v in env venv .venv; do
+            if [ -x "$DJANGO_DIR/$v/bin/python" ]; then VENV="$v"; break; fi
+          done
+          [ -n "$VENV" ] || { echo "::error::$DJANGO_DIR ichida virtual muhit (env/venv/.venv) topilmadi."; exit 1; }
+          echo "DJANGO_DIR=$DJANGO_DIR" >> "$GITHUB_ENV"
+          echo "PY=$DJANGO_DIR/$VENV/bin/python" >> "$GITHUB_ENV"
+          echo "PIP=$DJANGO_DIR/$VENV/bin/pip" >> "$GITHUB_ENV"
+
+      - name: Kodni yangilash
+        working-directory: ${{ env.REPO_DIR }}
+        run: |
+          set -euo pipefail
+          git fetch --prune origin
+          if ! git pull --ff-only origin main; then
+            echo "::error::fast-forward bo'lmadi — serverda commit qilinmagan o'zgarish yoki ajralib ketgan tarix bor."
+            git status --short
+            exit 1
+          fi
+          git log -1 --oneline
+
+      - name: Bog'liqliklar
+        working-directory: ${{ env.DJANGO_DIR }}
+        run: $PIP install -q -r requirements.txt
+
+      - name: Migratsiyalar
+        working-directory: ${{ env.DJANGO_DIR }}
+        run: $PY manage.py migrate --noinput
+
+      - name: Statik fayllar
+        working-directory: ${{ env.DJANGO_DIR }}
+        run: $PY manage.py collectstatic --noinput
+
+      - name: Xizmatni qayta ishga tushirish
+        run: |
+          set -euo pipefail
+          if ! sudo -n systemctl restart "$SERVICE"; then
+            echo "::error::Parolsiz sudo yo'q. Serverda bir marta /etc/sudoers.d/usta_top_pivot_deploy sozlanishi kerak."
+            exit 1
+          fi
+
+      - name: Sog'liqni tekshirish
+        run: |
+          set -euo pipefail
+          sleep 3
+          for i in $(seq 1 10); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: usta-top.simpl.uz' http://127.0.0.1:8011/ || true)
+            if [ "$code" = "200" ]; then echo "OK: / -> 200"; exit 0; fi
+            echo "urinish $i: / -> $code"; sleep 2
+          done
+          echo "::error::Xizmat 200 qaytarmadi — restartdan keyin crash bo'lgan bo'lishi mumkin."
+          exit 1

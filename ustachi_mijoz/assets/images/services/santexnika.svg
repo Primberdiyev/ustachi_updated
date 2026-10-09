@@ -1,0 +1,17 @@
+<!-- SANTEXNIKA — xizmat turi belgisi. Rang koddan (`currentColor`). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- ventil -->
+  <path d="M8 11.5h13M14.5 8v3.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- tanasi -->
+  <rect x="11" y="13" width="7" height="20" fill="currentColor" fill-opacity=".16"/>
+  <rect x="11" y="13" width="7" height="20" stroke="currentColor" stroke-width="2.2"/>
+  <!-- jo'mrak -->
+  <path d="M18 17h6a7 7 0 0 1 7 7v3.5" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- taglik -->
+  <path d="M7.5 33h14" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+  <!-- tomchi -->
+  <path d="M31 31.5c2.2 2.5 3.3 4.1 3.3 5.4a3.3 3.3 0 0 1-6.6 0c0-1.3 1.1-2.9 3.3-5.4z"
+        fill="currentColor" fill-opacity=".28" stroke="currentColor" stroke-width="1.9"
+        stroke-linejoin="round"/>
+</svg>

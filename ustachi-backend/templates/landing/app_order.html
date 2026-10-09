@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Buyurtmani Ustachi Pro’da ochish</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f5f7fb; color: #182230; }
+    main { box-sizing: border-box; width: min(100% - 32px, 420px); padding: 28px; border-radius: 20px; background: #fff; box-shadow: 0 12px 36px #18223014; text-align: center; }
+    h1 { margin: 0 0 10px; font-size: 22px; }
+    p { margin: 0 0 24px; color: #667085; line-height: 1.5; }
+    a { display: block; padding: 14px 18px; border-radius: 12px; background: #1769e0; color: #fff; font-weight: 650; text-decoration: none; }
+    a + a { margin-top: 12px; background: #eef3fa; color: #344054; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Buyurtma №{{ order_id }}</h1>
+    <p>Buyurtmani Ustachi Pro ilovasida ko‘rish uchun tugmani bosing.</p>
+    <a id="open-app" href="intent://ustachi.uz/app/order/{{ order_id }}/#Intent;scheme=https;package=com.ustachi.pro;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.ustachi.pro;end">Ilovada ochish</a>
+    <a href="{{ play_store_url }}">Ilovani Play Market’dan yuklab olish</a>
+  </main>
+  <script>
+    // Some in-app browsers do not hand verified HTTPS links to Android. Try an
+    // explicit Android intent; the visible buttons remain available if blocked.
+    if (/Android/i.test(navigator.userAgent)) {
+      window.setTimeout(function () {
+        window.location.href = document.getElementById('open-app').href;
+      }, 250);
+    }
+  </script>
+</body>
+</html>

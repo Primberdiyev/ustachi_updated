@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usta Top — WebSocket testi</title>
+<style>
+  :root {
+    --bg:#0f1216; --card:#171c22; --line:#272e37; --text:#e6e9ee; --muted:#8b95a3;
+    --ok:#3fbf7f; --bad:#ef5350; --warn:#e3b341; --accent:#4c8dff; --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:20px;background:var(--bg);color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-size:19px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 12px;font-weight:600}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+  input,select{width:100%;padding:9px 11px;background:#0e1217;border:1px solid var(--line);
+       border-radius:7px;color:var(--text);font-size:13px;font-family:var(--mono)}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .row>div{flex:1;min-width:150px}
+  button{padding:9px 16px;border:0;border-radius:7px;font-size:13px;font-weight:600;
+       cursor:pointer;background:var(--accent);color:#fff}
+  button:hover{filter:brightness(1.12)}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  button.ghost{background:#232a33;color:var(--text)}
+  button.danger{background:var(--bad)}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#555;margin-right:7px;vertical-align:middle}
+  .dot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .dot.off{background:var(--bad)}
+  .dot.wait{background:var(--warn)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+  .stat{background:#0e1217;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  .stat .k{font-size:11px;color:var(--muted)}
+  .stat .v{font-size:19px;font-weight:600;font-family:var(--mono);margin-top:2px}
+  #log{background:#0b0e12;border:1px solid var(--line);border-radius:8px;padding:12px;
+       height:340px;overflow-y:auto;font-family:var(--mono);font-size:12px;white-space:pre-wrap;word-break:break-word}
+  .l{margin-bottom:3px}
+  .t{color:#5c6673}
+  .l.ok{color:var(--ok)} .l.bad{color:var(--bad)} .l.warn{color:var(--warn)}
+  .l.rx{color:#7fd3ff} .l.tx{color:#c9a2ff} .l.sys{color:var(--muted)}
+  .chk{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text)}
+  .chk input{width:auto}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;padding-left:10px;border-left:2px solid var(--line)}
+  code{background:#0e1217;padding:1px 5px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Usta Top — WebSocket testi</h1>
+  <div class="sub">Ulanish uziladimi, qachon va nima sababdan — shuni aniqlash uchun.</div>
+
+  <!-- ── Ulanish ────────────────────────────────────────────── -->
+  <div class="card">
+    <h2>1. Ulanish</h2>
+    <div class="row">
+      <div style="flex:2">
+        <label>WebSocket manzili</label>
+        <input id="wsUrl" value="wss://usta-top.simpl.uz/ws/events/">
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:3">
+        <label>Access token (JWT)</label>
+        <input id="token" placeholder="eyJhbGciOi...">
+      </div>
+    </div>
+    <div class="btns">
+      <button id="btnConnect">Ulanish</button>
+      <button id="btnDisconnect" class="ghost" disabled>Uzish</button>
+      <span style="margin-left:8px"><span id="dot" class="dot"></span><span id="state">ulanmagan</span></span>
+    </div>
+  </div>
+
+  <!-- ── Token olish ────────────────────────────────────────── -->
+  <div class="card">
+    <h2>2. Token olish (ixtiyoriy — tokeningiz bo'lsa kerak emas)</h2>
+    <div class="row">
+      <div>
+        <label>API manzili</label>
+        <input id="apiBase" value="https://usta-top.simpl.uz">
+      </div>
+      <div style="max-width:150px">
+        <label>Ilova</label>
+        <select id="ns"><option value="client">Mijoz</option><option value="master">Usta</option></select>
+      </div>
+      <div>
+        <label>Telefon</label>
+        <input id="phone" placeholder="+998901234567">
+      </div>
+      <div style="max-width:130px">
+        <label>SMS kod</label>
+        <input id="code" placeholder="111111">
+      </div>
+    </div>
+    <div class="btns">
+      <button id="btnSend" class="ghost">Kod yuborish</button>
+      <button id="btnVerify" class="ghost">Tasdiqlash va token olish</button>
+    </div>
+    <div class="note">
+      Bu qism <code>file://</code> dan ishlamaydi — serverda CORS faqat
+      <code>localhost</code> va Netlify uchun ochiq. Shu papkada terminal ochib
+      <code>python -m http.server 8080</code> ni ishga tushiring va sahifani
+      <code>http://localhost:8080/ws_test.html</code> dan oching.
+      <b>WebSocket testining o'ziga bu shart emas</b> — u CORS'ga bo'ysunmaydi.
+    </div>
+  </div>
+
+  <!-- ── Tirik ushlash ──────────────────────────────────────── -->
+  <div class="card">
+    <h2>3. Uzilishni tekshirish</h2>
+    <div class="row">
+      <div style="max-width:200px">
+        <label>Avto-ping oralig'i (soniya)</label>
+        <input id="pingEvery" type="number" value="25" min="1">
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:16px">
+        <label class="chk"><input type="checkbox" id="autoPing"> Avto-ping</label>
+        <label class="chk"><input type="checkbox" id="autoReconnect"> Uzilsa qayta ulanish</label>
+      </div>
+    </div>
+    <div class="btns">
+      <button id="btnPing" class="ghost" disabled>Ping yuborish</button>
+      <button id="btnClear" class="ghost">Log tozalash</button>
+    </div>
+    <div class="note">
+      Avto-ping <b>o'chiq</b> holda qoldiring va kuting. Ulanish 30–120 soniyada
+      <code>1006</code> bilan uzilsa — sabab tarmoq/NAT yoki proksi timeout'i,
+      server tomonda heartbeat yo'qligi. Keyin avto-ping'ni yoqib qayta sinang:
+      uzilmasa, tashxis tasdiqlanadi.
+    </div>
+  </div>
+
+  <!-- ── Statistika ─────────────────────────────────────────── -->
+  <div class="card">
+    <h2>4. Statistika</h2>
+    <div class="stats">
+      <div class="stat"><div class="k">Hozirgi seans</div><div class="v" id="stUptime">—</div></div>
+      <div class="stat"><div class="k">Oxirgi xabardan beri</div><div class="v" id="stIdle">—</div></div>
+      <div class="stat"><div class="k">Eng uzun seans</div><div class="v" id="stBest">—</div></div>
+      <div class="stat"><div class="k">Ulanishlar</div><div class="v" id="stConn">0</div></div>
+      <div class="stat"><div class="k">Uzilishlar</div><div class="v" id="stDrop">0</div></div>
+      <div class="stat"><div class="k">Xabarlar</div><div class="v" id="stMsg">0</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Log</h2>
+    <div id="log"></div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ws = null, pingTimer = null, tickTimer = null;
+  var connectedAt = 0, lastMsgAt = 0, manualClose = false;
+  var stats = { conn: 0, drop: 0, msg: 0, best: 0 };
+
+  // WebSocket yopilish kodlari — "nega uzildi" degan savolning javobi shu yerda.
+  var CLOSE = {
+    1000: "normal yopilish",
+    1001: "server ketdi (restart / reload)",
+    1002: "protokol xatosi",
+    1005: "kod berilmadi",
+    1006: "ABNORMAL — close frame kelmadi (tarmoq/NAT/proksi uzdi)",
+    1011: "server ichki xatosi",
+    1012: "server qayta ishga tushmoqda",
+    1013: "server band, keyinroq urinmoq kerak",
+    1015: "TLS xatosi",
+    4401: "token yaroqsiz yoki yo'q (consumer rad etdi)"
+  };
+
+  function pad(n, w) { return String(n).padStart(w || 2, "0"); }
+
+  function stamp() {
+    var d = new Date();
+    return pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" +
+           pad(d.getSeconds()) + "." + pad(d.getMilliseconds(), 3);
+  }
+
+  function dur(ms) {
+    if (!ms) return "—";
+    var s = Math.floor(ms / 1000);
+    if (s < 60) return s + "s";
+    return Math.floor(s / 60) + "m " + pad(s % 60) + "s";
+  }
+
+  function log(text, cls) {
+    var box = $("log");
+    var atBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 40;
+    var line = document.createElement("div");
+    line.className = "l " + (cls || "sys");
+    var t = document.createElement("span");
+    t.className = "t";
+    t.textContent = stamp() + "  ";
+    line.appendChild(t);
+    line.appendChild(document.createTextNode(text));
+    box.appendChild(line);
+    if (atBottom) box.scrollTop = box.scrollHeight;
+  }
+
+  function setState(text, cls) {
+    $("state").textContent = text;
+    $("dot").className = "dot " + (cls || "");
+  }
+
+  function refreshStats() {
+    $("stUptime").textContent = connectedAt ? dur(Date.now() - connectedAt) : "—";
+    $("stIdle").textContent = lastMsgAt ? dur(Date.now() - lastMsgAt) : "—";
+    $("stBest").textContent = dur(stats.best);
+    $("stConn").textContent = stats.conn;
+    $("stDrop").textContent = stats.drop;
+    $("stMsg").textContent = stats.msg;
+  }
+
+  function startPing() {
+    stopPing();
+    if (!$("autoPing").checked) return;
+    var every = Math.max(1, parseInt($("pingEvery").value, 10) || 25) * 1000;
+    pingTimer = setInterval(function () {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send("ping");
+        log("→ ping", "tx");
+      }
+    }, every);
+  }
+
+  function stopPing() {
+    if (pingTimer) { clearInterval(pingTimer); pingTimer = null; }
+  }
+
+  function connect() {
+    var base = $("wsUrl").value.trim();
+    var token = $("token").value.trim();
+    if (!base) { log("WebSocket manzili bo'sh", "bad"); return; }
+
+    var url = base + (base.indexOf("?") === -1 ? "?" : "&") +
+              "token=" + encodeURIComponent(token);
+
+    manualClose = false;
+    setState("ulanmoqda…", "wait");
+    log("Ulanmoqda: " + base + (token ? " (token berildi)" : " (TOKENSIZ)"), "sys");
+
+    try {
+      ws = new WebSocket(url);
+    } catch (err) {
+      log("WebSocket yaratib bo'lmadi: " + err.message, "bad");
+      setState("xato", "off");
+      return;
+    }
+
+    ws.onopen = function () {
+      connectedAt = Date.now();
+      lastMsgAt = Date.now();
+      stats.conn++;
+      setState("ulangan", "on");
+      log("✓ ULANDI (101 Switching Protocols)", "ok");
+      $("btnConnect").disabled = true;
+      $("btnDisconnect").disabled = false;
+      $("btnPing").disabled = false;
+      startPing();
+      refreshStats();
+    };
+
+    ws.onmessage = function (e) {
+      lastMsgAt = Date.now();
+      stats.msg++;
+      var text = e.data;
+      try { text = JSON.stringify(JSON.parse(e.data)); } catch (_) {}
+      log("← " + text, "rx");
+      refreshStats();
+    };
+
+    ws.onerror = function () {
+      // Brauzer xavfsizlik sababli tafsilot bermaydi — kod `onclose` da keladi.
+      log("WebSocket xatosi (tafsilot onclose da)", "bad");
+    };
+
+    ws.onclose = function (e) {
+      var lived = connectedAt ? Date.now() - connectedAt : 0;
+      if (lived > stats.best) stats.best = lived;
+      if (connectedAt && !manualClose) stats.drop++;
+
+      var why = CLOSE[e.code] || "noma'lum kod";
+      var cls = (e.code === 1000 || manualClose) ? "warn" : "bad";
+      log("✗ YOPILDI — kod " + e.code + " (" + why + ")" +
+          (e.reason ? ', sabab: "' + e.reason + '"' : "") +
+          ", toza: " + e.wasClean +
+          (lived ? ", yashadi: " + dur(lived) : ", ulanolmadi"), cls);
+
+      if (e.code === 1006 && lived) {
+        log("  ↳ 1006 + close frame yo'q = server EMAS, oradagi qatlam uzdi " +
+            "(NAT / proksi timeout). Avto-ping bilan sinab ko'ring.", "warn");
+      }
+      if (e.code === 4401) {
+        log("  ↳ Token yaroqsiz yoki muddati tugagan (access 15 daqiqa). " +
+            "Yangi token oling.", "warn");
+      }
+
+      ws = null;
+      connectedAt = 0;
+      stopPing();
+      setState("ulanmagan", "off");
+      $("btnConnect").disabled = false;
+      $("btnDisconnect").disabled = true;
+      $("btnPing").disabled = true;
+      refreshStats();
+
+      if (!manualClose && $("autoReconnect").checked) {
+        log("2 soniyadan keyin qayta ulanadi…", "sys");
+        setTimeout(function () {
+          if (!manualClose && $("autoReconnect").checked) connect();
+        }, 2000);
+      }
+    };
+  }
+
+  function disconnect() {
+    manualClose = true;
+    $("autoReconnect").checked = false;
+    if (ws) { log("Qo'lda uzildi", "warn"); ws.close(1000, "manual"); }
+  }
+
+  // ── Token olish (OTP) ────────────────────────────────────────
+  function api(path, body) {
+    var base = $("apiBase").value.trim().replace(/\/$/, "");
+    var ns = $("ns").value;
+    var url = base + "/api/v1/" + ns + "/auth/" + path;
+    log("POST " + url, "tx");
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.text().then(function (t) {
+        var data;
+        try { data = JSON.parse(t); } catch (_) { data = t; }
+        return { status: r.status, data: data };
+      });
+    });
+  }
+
+  $("btnSend").onclick = function () {
+    var phone = $("phone").value.trim();
+    if (!phone) { log("Telefon raqam kiriting", "bad"); return; }
+    api("send-code/", { phone_number: phone }).then(function (r) {
+      log("← " + r.status + " " + JSON.stringify(r.data), r.status < 300 ? "ok" : "bad");
+    }).catch(function (e) {
+      log("So'rov ketmadi: " + e.message + "  ↳ CORS bo'lishi mumkin — " +
+          "sahifani http://localhost:PORT dan oching.", "bad");
+    });
+  };
+
+  $("btnVerify").onclick = function () {
+    var phone = $("phone").value.trim(), code = $("code").value.trim();
+    if (!phone || !code) { log("Telefon va kodni kiriting", "bad"); return; }
+    api("verify-code/", { phone_number: phone, code: code }).then(function (r) {
+      log("← " + r.status + " " + JSON.stringify(r.data), r.status < 300 ? "ok" : "bad");
+      if (r.data && r.data.access) {
+        $("token").value = r.data.access;
+        log("✓ Token maydonga qo'yildi — endi \"Ulanish\" ni bosing.", "ok");
+      }
+    }).catch(function (e) {
+      log("So'rov ketmadi: " + e.message + "  ↳ CORS bo'lishi mumkin — " +
+          "sahifani http://localhost:PORT dan oching.", "bad");
+    });
+  };
+
+  // ── Tugmalar ─────────────────────────────────────────────────
+  $("btnConnect").onclick = connect;
+  $("btnDisconnect").onclick = disconnect;
+  $("btnPing").onclick = function () {
+    if (ws && ws.readyState === WebSocket.OPEN) { ws.send("ping"); log("→ ping", "tx"); }
+  };
+  $("btnClear").onclick = function () { $("log").innerHTML = ""; };
+  $("autoPing").onchange = function () { if (ws) startPing(); };
+  $("pingEvery").onchange = function () { if (ws) startPing(); };
+
+  tickTimer = setInterval(refreshStats, 1000);
+
+  log("Tayyor. Token qo'ying (yoki 2-bo'limdan oling) va \"Ulanish\" ni bosing.", "sys");
+  log("Kutilgan: ulangach darhol {\"topic\":\"connected\"} keladi.", "sys");
+  setState("ulanmagan", "off");
+  refreshStats();
+})();
+</script>
+</body>
+</html>

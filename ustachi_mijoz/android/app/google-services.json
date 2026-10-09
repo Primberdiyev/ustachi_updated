@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1013847349146",
+    "project_id": "ustatop-f3940",
+    "storage_bucket": "ustatop-f3940.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013847349146:android:4ec5839a3c1db001ed8c23",
+        "android_client_info": {
+          "package_name": "uz.ustachi.master"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAANEqG6o9TDaQibnF4XbSRJuC_swYbHX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013847349146:android:3f687efa716b0bffed8c23",
+        "android_client_info": {
+          "package_name": "com.ustachi.mijoz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAANEqG6o9TDaQibnF4XbSRJuC_swYbHX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

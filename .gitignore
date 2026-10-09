@@ -1,0 +1,7 @@
+# Gradle hisobotlari — generatsiya qilinadi (Flutter .gitignore faqat /build/ ni tutadi)
+android/build/
+**/android/build/
+
+# macOS axlati
+.DS_Store
+**/.DS_Store

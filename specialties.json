@@ -1,0 +1,104 @@
+{
+  "specialties": [
+    {
+      "name": "Rom ustasi",
+      "question": ""
+    },
+    {
+      "name": "Tom yopish ustasi",
+      "question": "Tom yopishning bir kvadrat metrini qanchadan olasiz?"
+    },
+    {
+      "name": "G'isht teruvchi",
+      "question": "Bitta g'ishtni qanchadan terasiz?"
+    },
+    {
+      "name": "Suvoqchi (shtukatur-sement)",
+      "question": "Suvoqning bir kvadrat metri qancha turadi?"
+    },
+    {
+      "name": "Beton ishlari ustasi",
+      "question": "Betonning bir kub metri qancha turadi?"
+    },
+    {
+      "name": "Elektrik",
+      "question": "Bitta nuqta (rozetka/vklyuchatel) qancha turadi?"
+    },
+    {
+      "name": "Santexnik",
+      "question": "Bitta nuqta (ulanish) qancha turadi?"
+    },
+    {
+      "name": "Kafel-plitka ustasi",
+      "question": "Kafel yotqizishning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Bo'yoqchi (malyar)",
+      "question": "Bo'yashning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Gipskarton ustasi",
+      "question": "Gipskartonning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Mebel ustasi",
+      "question": ""
+    },
+    {
+      "name": "Darvoza-panjara ustasi (temirchi)",
+      "question": "Darvoza-panjaraning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Payvandchi",
+      "question": "Payvandning bir metri qancha turadi?"
+    },
+    {
+      "name": "Pol-potolok ustasi",
+      "question": "Pol yoki potolok ishining bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Quduq qazish ustasi",
+      "question": "Quduqning bir metrini qanchadan qazasiz?"
+    },
+    {
+      "name": "Konditsioner o'rnatish",
+      "question": "Bitta konditsioner o'rnatish qancha turadi?"
+    },
+    {
+      "name": "Kunlik ishchilar (mardikor)",
+      "question": "Bir kunlik ish haqingiz qancha?"
+    },
+    {
+      "name": "Zina ustasi",
+      "question": "Zinaning bir metri qancha turadi?"
+    },
+    {
+      "name": "Jalyuzi-parda xizmati",
+      "question": "Jalyuzi-parda o'rnatishning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Fasad ustasi",
+      "question": "Fasad ishining bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Bruschatka ustasi",
+      "question": "Bruschatka yotqizishning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Travertin ustasi",
+      "question": "Travertin ishining bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Landshaft xizmati (gul, archa)",
+      "question": ""
+    },
+    {
+      "name": "Asfalt ustasi",
+      "question": "Asfalt yotqizishning bir kvadrat metri qancha?"
+    },
+    {
+      "name": "Hammom (dush kabinasi)",
+      "question": "Bitta dush kabinasi o'rnatish qancha turadi?"
+    }
+  ]
+}

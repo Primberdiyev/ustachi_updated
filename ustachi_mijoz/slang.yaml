@@ -1,0 +1,6 @@
+base_locale: uz
+fallback_strategy: base_locale
+input_directory: lib/core/utils/localization
+output_directory: lib/core/utils/localization/lib/gen
+output_file_name: strings.g.dart
+string_interpolation: dart
